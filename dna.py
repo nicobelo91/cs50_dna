@@ -8,31 +8,55 @@ if len(sys.argv) != 3:
     print("Usage: python dna.py data.csv sequence.txt")
     sys.exit(1)
 # Open csv file and read into memory
-csvfile = open("small.csv","r")
+#with open("databases/small.csv") as csvfile:
 # Open dna sequence txt file, read into memory
-dnasequence = open()
+with open(f"{sys.argv[2]}") as dnasequence:
 
-# For each STR compute the longest run of consecutive repeats
+    # For each STR compute the longest run of consecutive repeats
 
+    # Search in the database:
+    database = csv.reader(dnasequence)
+    #database = "AGATCASDASDSAFGFDGGFAGATC"
+    for dna in database:
+        #print(dna)
+        # Search for AGATC
+        count = 0
+        pattern = 'AGATC'
+        """
+        while pattern in dna:
+            count += 1
+            pattern += "AGATC"
+            print(count)
+        """
+        AGATC = re.findall(r'(?:AGATC)+', dna)
+        print(AGATC)
 
-# Save STR counts into a data structure
-writer = csv.writer(file)
-# Compare the STR counts against each row in CSV file
-if match:
-    print("Lavender")
-else:
-    print("No Match")
+        largest = max(AGATC, key=len)
+        print(len(largest) // 4)
+        
+        
+    """
+    # Search for AATG
+    AATG = re.findall(r'(?:AATG)+',database)
+    print(AATG)
 
-"""
-s = "AASDASDDAAAAAAAAERQREQREQRAAAAREWQRWERAAA"
+    largest = max(AATG, key=len)
+    print(len(largest) // 2)
 
-groups = re.findall(r'(?:AA)+', s)
-print(groups)
-# ['AA', 'AAAAAAAA', 'AAAA', 'AA']
+    # Search for TATC
+    TATC = re.findall(r'(?:TATC)+',database)
+    print(TATC)
 
-largest = max(groups, key=len)
-print(len(largest) // 2)
-# 4
-"""
-csvfile.close()
-dnasequence.close()
+    largest = max(TATC, key=len)
+    print(len(largest) // 2)
+
+    # Save STR counts into a data structure
+    #writer = csv.writer(file)
+    """
+    # Compare the STR counts against each row in CSV file
+    """
+    if match:
+        print("Lavender")
+    else:
+        print("No Match")
+    """
