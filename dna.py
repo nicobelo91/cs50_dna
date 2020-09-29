@@ -18,19 +18,13 @@ with open(f"{sys.argv[2]}") as dnasequence:
     database = csv.reader(dnasequence)
     #database = "AGATCASDASDSAFGFDGGFAGATC"
     for dna in database:
-        #print(dna)
+        # Convert dna list into a string
+        listToStr = ''.join([str(elem) for elem in dna])
+        
         # Search for AGATC
-        count = 0
-        pattern = 'AGATC'
-        """
-        while pattern in dna:
-            count += 1
-            pattern += "AGATC"
-            print(count)
-        """
-        AGATC = re.findall(r'(?:AGATC)+', dna)
+        AGATC = re.findall(r'(?:AGATC)+', listToStr)
         print(AGATC)
-
+    
         largest = max(AGATC, key=len)
         print(len(largest) // 4)
         
